@@ -10,7 +10,6 @@ const {
   ScrollView,
   Platform,
   StyleSheet,
-  ViewPagerAndroid,
   InteractionManager,
 } = ReactNative;
 const TimerMixin = require('react-timer-mixin');
@@ -18,10 +17,6 @@ const TimerMixin = require('react-timer-mixin');
 const SceneComponent = require('./SceneComponent');
 const DefaultTabBar = require('./DefaultTabBar');
 const ScrollableTabBar = require('./ScrollableTabBar');
-
-const AnimatedViewPagerAndroid = Platform.OS === 'android' ?
-  Animated.createAnimatedComponent(ViewPagerAndroid) :
-  undefined;
 
 const ScrollableTabView = createReactClass({
   mixins: [TimerMixin, ],
@@ -63,8 +58,6 @@ const ScrollableTabView = createReactClass({
     const containerWidth = Dimensions.get('window').width;
     let scrollValue;
     let scrollXIOS;
-    let positionAndroid;
-    let offsetAndroid;
 
     scrollXIOS = new Animated.Value(this.props.initialPage * containerWidth);
     const containerWidthAnimatedValue = new Animated.Value(containerWidth);
@@ -82,8 +75,6 @@ const ScrollableTabView = createReactClass({
       currentPage: this.props.initialPage,
       scrollValue,
       scrollXIOS,
-      positionAndroid,
-      offsetAndroid,
       containerWidth,
       sceneKeys: this.newSceneKeys({ currentPage: this.props.initialPage, }),
     };
@@ -329,9 +320,6 @@ module.exports = ScrollableTabView;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-  },
-  scrollableContentAndroid: {
     flex: 1,
   },
 });
